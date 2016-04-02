@@ -148,6 +148,7 @@ internal class CoreDataStorageScheme: StorageScheme {
     private func isNew(obj : XDataObject) -> Bool {
         let o = obj as! XDataObject
         prepareRuntimeCache()
+//        let match = runtimeCache?.filter({$0.key == obj.key})
         let match = runtimeCache?.filter({$0.key == o.key})
         let result = match!.count == 0
         NSLog("CoreDataStorageScheme.isNew=\(result)")
@@ -184,8 +185,9 @@ internal class CoreDataStorageScheme: StorageScheme {
     private func delete(obj : XDataObject) -> Bool {
         var deleted = false
         NSLog("CoreDataStorageScheme.delete")
-        prepareRuntimeCache()
-        if (runtimeCache?.filter(({$0.key == obj.key})))!.count > 0 {
+        if isNew(obj) {
+//        prepareRuntimeCache()
+//        if (runtimeCache?.filter(({$0.key == obj.key})))!.count > 0 {
             
             runtimeCache = runtimeCache?.filter({$0.key != obj.key})
             
@@ -215,7 +217,7 @@ internal class CoreDataStorageScheme: StorageScheme {
     private func shareAll(adds : [XDataObject], deletes : [XDataObject]) {
         NSLog("CoreDataStorageScheme.shareAll")
         storageObservers.forEach { (smo) -> () in
-            smo.shareUpdates(adds, deletes: deletes)
+            smo.shareUpdates(self, adds: adds, deletes: deletes)
         }
         
     }

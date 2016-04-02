@@ -10,7 +10,7 @@ import Foundation
 
 internal protocol StorageSchemeListener {
     
-    func shareUpdates(adds: [XDataObject], deletes: [XDataObject])
+    func shareUpdates(source: StorageScheme, adds: [XDataObject], deletes: [XDataObject])
     
 }
 
@@ -28,3 +28,4 @@ internal protocol StorageScheme {
 
 
 }
+

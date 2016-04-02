@@ -74,8 +74,38 @@ class CoreDataStorageSchemeTest: QuickSpec {
                     expect(obj1Type.subjectType == TestObject.self || obj1Type.subjectType == AnotherTestObject.self).to(equal(true))
                     expect(obj0Type.subjectType == obj1Type.subjectType).to(equal(false))
                 }
+            }
+            
+            describe("on changes to the data") {
+
+                it("observers are notified") {
+                    
+                    StorageManager.reset()
+                    var c = StorageManagerConfig()
+                    c.types.append(.CoreData)
+                    c.types.append(.WatchConnectivity)
+                    c.objectFactory = TestObjectFactory()
+                    c.options["CoreDataInMemory"] = "CoreDataInMemory"
+                    
+                    let cdsm = CoreDataStorageScheme(config: c)
+
+                    let obs = TestObserver()
+                    cdsm.addObserver(obs)
+                    
+                    let tO = TestObject()
+                    cdsm.addDataObject(tO)
+                    
+                    expect(obs.log.count == 1).to(equal(true))
+                    expect(obs.log[0].uppercaseString).to(equal("add with key=TestObject:Key".uppercaseString))
+                    obs.log = [String]()
+                    
+                    cdsm.deleteDataObject(tO)
+                    expect(obs.log.count == 1).to(equal(true))
+                    expect(obs.log[0].uppercaseString).to(equal("delete with key=TestObject:Key".uppercaseString))
+                }
                 
             }
+            
         }
     }
 }

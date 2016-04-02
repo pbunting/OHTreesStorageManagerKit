@@ -58,6 +58,19 @@ class TestObjectFactory : XDataObjectFactory {
     }
 }
 
+class TestObserver: StorageSchemeListener {
+    
+    internal var log : [String] = [String]()
+    
+    func shareUpdates(scheme: StorageScheme, adds: [XDataObject], deletes: [XDataObject]) {
+        adds.forEach {
+            log.append("add with key=\($0.key)")
+        }
+        deletes.forEach {
+            log.append("delete with key=\($0.key)")
+        }
+    }
+}
 
 class StorageManagerTest: QuickSpec {
     

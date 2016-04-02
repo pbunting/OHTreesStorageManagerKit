@@ -59,6 +59,31 @@ class StorageManagerTest2: QuickSpec {
                 }
             }
             
+            describe("shares updates") {
+                
+                beforeEach() {
+                    var c = StorageManagerConfig()
+                    StorageManager.reset()
+                    
+                    c.types.append(.CoreData)
+                    c.options["CoreDataInMemory"] = "CoreDataInMemory"
+                    c.types.append(.CloudKit)
+                    c.objectFactory = objectFactory
+                    expect{ try StorageManager.configure(c) }.toNot(throwError())
+                }
+
+                it("with the application") {
+                    let sm = StorageManager.instance!
+
+                    
+                }
+                
+                it("with all storage schemes") {
+                    
+                }
+                
+            }
+            
         }
     }
     

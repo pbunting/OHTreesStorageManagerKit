@@ -22,7 +22,7 @@ public struct StorageManagerConfig {
 }
 
 
-public class StorageManager {
+public class StorageManager : StorageSchemeListener{
 
     private var config: StorageManagerConfig!
     
@@ -89,10 +89,21 @@ public class StorageManager {
             if $0 == preferredTypeChosen {
                 preferredStorageScheme = scheme
             }
+            scheme.addObserver(self)
             storageSchemes.append(scheme)
         }
     }
+    
+    func shareUpdates(source: StorageScheme, adds: [XDataObject], deletes: [XDataObject]) {
+        storageSchemes.filter({ ($0 as! AnyObject) !== (source as! AnyObject) })
+            .forEach {
+                let ss = $0
+                adds.forEach { ss.addDataObject($0) }
+                deletes.forEach { ss.deleteDataObject($0) }
+            }
+    }
 }
+
 
 public enum StorageManagerErrorType: ErrorType {
     case MissingObjectFactory

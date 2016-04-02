@@ -1,10 +1,12 @@
 {
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "17ECF12DC725A591CDCFA7131769899F185EB072+++27559F5",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "95438028B10BBB846574013D29F154A00556A9D1+++2A71511" : 0,
     "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64+++9390394" : 0,
+    "17ECF12DC725A591CDCFA7131769899F185EB072+++27559F5" : 0,
     "95438028B10BBB846574013D29F154A00556A9D1+++240C063" : 0,
     "194A7A54F3CE0138A6C320E0643B7C60F8218891+++2CE7E8A" : 0,
     "95438028B10BBB846574013D29F154A00556A9D1+++7F505D2" : 0
@@ -13,6 +15,7 @@
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "95438028B10BBB846574013D29F154A00556A9D1+++2A71511" : "OHTreesStorageManagerKit\/Carthage\/Checkouts\/Nimble\/",
     "D0725CAC6FF2D66F2C83C2C48DC12106D42DAA64+++9390394" : "OHTreesStorageManagerKit\/Carthage\/Checkouts\/Quick\/",
+    "17ECF12DC725A591CDCFA7131769899F185EB072+++27559F5" : "OHTreesStorageManagerKit\/",
     "95438028B10BBB846574013D29F154A00556A9D1+++240C063" : "OHTreesStorageManagerKit\/Carthage\/Checkouts\/Quick\/Externals\/Nimble\/",
     "194A7A54F3CE0138A6C320E0643B7C60F8218891+++2CE7E8A" : "OHTreesStorageManagerKit\/Carthage\/Checkouts\/Curry\/",
     "95438028B10BBB846574013D29F154A00556A9D1+++7F505D2" : "OHTreesStorageManagerKit\/Carthage\/Checkouts\/Quick\/Externals\/Nimble\/"
@@ -21,6 +24,11 @@
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "OHTreesStorageManagerKit.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:pbunting\/OHTreesStorageManagerKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "17ECF12DC725A591CDCFA7131769899F185EB072+++27559F5"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/thoughtbot\/Curry.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
