@@ -11,6 +11,5 @@ Pod::Spec.new do |spec|
   spec.source = { git: "https://github.com/pbunting/OHTreesStorageManagerKit.git", tag: "v#{spec.version}", submodules: true }
   spec.source_files = "OHTreesStorageManagerKit/**/*.{h,swift}"
 
-  spec.dependency "Curry", "~> 1.4.0"
 end
 

@@ -13,7 +13,6 @@
 		2F356B7A1CA255A1009DBE8A /* XDataObjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F356B761CA22DCD009DBE8A /* XDataObjectModel.xcdatamodeld */; };
 		2FA49BC11C9DE035002F76CC /* OHTreesStorageManagerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FA49BC01C9DE035002F76CC /* OHTreesStorageManagerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2FA49BC81C9DE035002F76CC /* OHTreesStorageManagerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49BBD1C9DE035002F76CC /* OHTreesStorageManagerKit.framework */; };
-		2FA49C3F1C9DF105002F76CC /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C371C9DF0C0002F76CC /* Curry.framework */; };
 		2FA49C401C9DF120002F76CC /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C231C9DF0B9002F76CC /* Nimble.framework */; };
 		2FA49C411C9DF120002F76CC /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C0E1C9DF0AF002F76CC /* Quick.framework */; };
 		2FA49C431C9DF579002F76CC /* StorageManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA49C421C9DF579002F76CC /* StorageManagerTest.swift */; };
@@ -140,34 +139,6 @@
 			remoteGlobalIDString = 1F5DF15E1BDCA0CE00C3A531;
 			remoteInfo = "Nimble-tvOSTests";
 		};
-		2FA49C361C9DF0C0002F76CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2FA49C2E1C9DF0C0002F76CC /* Curry.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F88630561B4EF96200F53969;
-			remoteInfo = "Curry-iOS";
-		};
-		2FA49C381C9DF0C0002F76CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2FA49C2E1C9DF0C0002F76CC /* Curry.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F886307D1B4EF9F800F53969;
-			remoteInfo = "Curry-Mac";
-		};
-		2FA49C3A1C9DF0C0002F76CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2FA49C2E1C9DF0C0002F76CC /* Curry.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 804D01F31BA3684C0005BBC4;
-			remoteInfo = "Curry-watchOS";
-		};
-		2FA49C3C1C9DF0C0002F76CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2FA49C2E1C9DF0C0002F76CC /* Curry.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 80E059071BA9FA7F0077CBA7;
-			remoteInfo = "Curry-tvOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -182,7 +153,6 @@
 		2FA49BCE1C9DE035002F76CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FA49BFB1C9DF0AF002F76CC /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Carthage/Checkouts/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
 		2FA49C191C9DF0B9002F76CC /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Carthage/Checkouts/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
-		2FA49C2E1C9DF0C0002F76CC /* Curry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Curry.xcodeproj; path = Carthage/Checkouts/Curry/Curry.xcodeproj; sourceTree = "<group>"; };
 		2FA49C421C9DF579002F76CC /* StorageManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManagerTest.swift; sourceTree = "<group>"; };
 		2FA49C5B1C9DF95A002F76CC /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		2FA49C5D1C9E26C2002F76CC /* StorageScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageScheme.swift; sourceTree = "<group>"; };
@@ -201,7 +171,6 @@
 			files = (
 				2FA49C691C9E71E6002F76CC /* CloudKit.framework in Frameworks */,
 				2FA49C6A1C9E71E6002F76CC /* CoreData.framework in Frameworks */,
-				2FA49C3F1C9DF105002F76CC /* Curry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,23 +263,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2FA49C2F1C9DF0C0002F76CC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2FA49C371C9DF0C0002F76CC /* Curry.framework */,
-				2FA49C391C9DF0C0002F76CC /* Curry.framework */,
-				2FA49C3B1C9DF0C0002F76CC /* Curry.framework */,
-				2FA49C3D1C9DF0C0002F76CC /* Curry.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		2FA49C3E1C9DF0C8002F76CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				2FA49C671C9E71E6002F76CC /* CloudKit.framework */,
 				2FA49C681C9E71E6002F76CC /* CoreData.framework */,
-				2FA49C2E1C9DF0C0002F76CC /* Curry.xcodeproj */,
 				2FA49C191C9DF0B9002F76CC /* Nimble.xcodeproj */,
 				2FA49BFB1C9DF0AF002F76CC /* Quick.xcodeproj */,
 			);
@@ -397,10 +354,6 @@
 			productRefGroup = 2FA49BBE1C9DE035002F76CC /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 2FA49C2F1C9DF0C0002F76CC /* Products */;
-					ProjectRef = 2FA49C2E1C9DF0C0002F76CC /* Curry.xcodeproj */;
-				},
 				{
 					ProductGroup = 2FA49C1A1C9DF0B9002F76CC /* Products */;
 					ProjectRef = 2FA49C191C9DF0B9002F76CC /* Nimble.xcodeproj */;
@@ -522,34 +475,6 @@
 			fileType = wrapper.cfbundle;
 			path = NimbleTests.xctest;
 			remoteRef = 2FA49C2C1C9DF0B9002F76CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2FA49C371C9DF0C0002F76CC /* Curry.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Curry.framework;
-			remoteRef = 2FA49C361C9DF0C0002F76CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2FA49C391C9DF0C0002F76CC /* Curry.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Curry.framework;
-			remoteRef = 2FA49C381C9DF0C0002F76CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2FA49C3B1C9DF0C0002F76CC /* Curry.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Curry.framework;
-			remoteRef = 2FA49C3A1C9DF0C0002F76CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2FA49C3D1C9DF0C0002F76CC /* Curry.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Curry.framework;
-			remoteRef = 2FA49C3C1C9DF0C0002F76CC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

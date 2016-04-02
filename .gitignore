@@ -57,3 +57,5 @@ Cartfile.resolved
 # adding DS_Store
 .DS_Store
 
+*.xcscmblueprint
+
