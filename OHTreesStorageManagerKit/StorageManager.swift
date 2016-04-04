@@ -21,6 +21,13 @@ public struct StorageManagerConfig {
     var options : [String: AnyObject] = [String: AnyObject]()
 }
 
+public protocol StorageManagerObserver {
+    
+}
+
+public protocol StorageManagerBatchObserver {
+    
+}
 
 public class StorageManager : StorageSchemeListener{
 
@@ -78,13 +85,12 @@ public class StorageManager : StorageSchemeListener{
         config.types.forEach {
             var scheme: StorageScheme
             switch $0 {
-//            case .CoreData:
-//                scheme = CoreDataStorageScheme(objectFactory: StorageManager.objectFactory!)
+            case .CoreData:
+                scheme = CoreDataStorageScheme(config: config)
 //            case .CloudKit:
 //                scheme = CloudKitStorageScheme(objectFactory: StorageManager.objectFactory!)
             default: // WatchConnectivity
-//                scheme = WatchConnectivityStorageScheme(objectFactory: StorageManager.objectFactory!)
-                scheme = CoreDataStorageScheme(config: config)
+                scheme = WatchConnectivityStorageScheme(config: config)
             }
             if $0 == preferredTypeChosen {
                 preferredStorageScheme = scheme

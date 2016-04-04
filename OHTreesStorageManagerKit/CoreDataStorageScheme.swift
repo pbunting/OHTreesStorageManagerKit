@@ -185,12 +185,9 @@ internal class CoreDataStorageScheme: StorageScheme {
     private func delete(obj : XDataObject) -> Bool {
         var deleted = false
         NSLog("CoreDataStorageScheme.delete")
-        if isNew(obj) {
-//        prepareRuntimeCache()
-//        if (runtimeCache?.filter(({$0.key == obj.key})))!.count > 0 {
+        if !isNew(obj) {
             
             runtimeCache = runtimeCache?.filter({$0.key != obj.key})
-            
             
             let fetchRequest = NSFetchRequest(entityName: obj.objectName.uppercaseString)
             let targetKey = obj.key

@@ -44,9 +44,23 @@ internal class WatchConnectivityStorageScheme: StorageScheme {
     
     var runtimeCache: [XDataObject]?
     
+    private func initializeFromWatchKit() -> [XDataObject] {
+        NSLog("WatchStorageManager.initializeFromWatchKit")
+        guard let objectDicts = WCSession.defaultSession().receivedApplicationContext["Objects"] as? [[String : AnyObject]]
+            else {
+                return []
+        }
+        let timestamp = WCSession.defaultSession().receivedApplicationContext["timestamp"]
+        NSLog("Rx ApplicationContext [@\(timestamp)] \(objectDicts))")
+        return objectDicts.flatMap {
+            self.dataObjectFactory.fromDictionary($0)
+        }
+    }
+
+    
     private func prepareRuntimeCache() {
         if runtimeCache == nil {
-//            runtimeCache = initializeFromCoredata()
+            runtimeCache = initializeFromWatchKit()
             shareAll(runtimeCache!, deletes: [XDataObject]())
         }
     }
