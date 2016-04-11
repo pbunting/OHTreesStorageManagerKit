@@ -62,12 +62,16 @@ class TestObserver: StorageSchemeListener {
     
     internal var log : [String] = [String]()
     
-    func shareUpdates(scheme: StorageScheme, adds: [XDataObject], deletes: [XDataObject]) {
-        adds.forEach {
-            log.append("add with key=\($0.key)")
+    func shareUpdates(scheme: StorageScheme, adds: [XDataObject]?, deletes: [XDataObject]?) {
+        if let a = adds {
+            a.forEach {
+                log.append("add with key=\($0.key)")
+            }
         }
-        deletes.forEach {
-            log.append("delete with key=\($0.key)")
+        if let d = deletes {
+            d.forEach {
+                log.append("delete with key=\($0.key)")
+            }
         }
     }
 }

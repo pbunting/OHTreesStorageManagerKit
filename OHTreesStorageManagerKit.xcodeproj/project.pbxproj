@@ -25,6 +25,7 @@
 		2FA49C661C9E697D002F76CC /* WatchConnectivityStorageScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA49C641C9E697D002F76CC /* WatchConnectivityStorageScheme.swift */; };
 		2FA49C691C9E71E6002F76CC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C671C9E71E6002F76CC /* CloudKit.framework */; };
 		2FA49C6A1C9E71E6002F76CC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C681C9E71E6002F76CC /* CoreData.framework */; };
+		2FF628521CB2AB8100A90797 /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF628511CB2AB8100A90797 /* WatchSessionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		2FA49C641C9E697D002F76CC /* WatchConnectivityStorageScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectivityStorageScheme.swift; sourceTree = "<group>"; };
 		2FA49C671C9E71E6002F76CC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		2FA49C681C9E71E6002F76CC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2FF628511CB2AB8100A90797 /* WatchSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 				2FA49C5D1C9E26C2002F76CC /* StorageScheme.swift */,
 				2FA49C631C9E697D002F76CC /* CloudKitStorageScheme.swift */,
 				2FA49C641C9E697D002F76CC /* WatchConnectivityStorageScheme.swift */,
+				2FF628511CB2AB8100A90797 /* WatchSessionDelegate.swift */,
 				2FA49C5F1C9E2784002F76CC /* XDataObject.swift */,
 				2FA49C611C9E673A002F76CC /* CoreDataStorageScheme.swift */,
 			);
@@ -526,6 +529,7 @@
 				2FA49C5C1C9DF95A002F76CC /* StorageManager.swift in Sources */,
 				2FA49C621C9E673A002F76CC /* CoreDataStorageScheme.swift in Sources */,
 				2FA49C651C9E697D002F76CC /* CloudKitStorageScheme.swift in Sources */,
+				2FF628521CB2AB8100A90797 /* WatchSessionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

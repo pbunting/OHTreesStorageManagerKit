@@ -73,7 +73,7 @@ class StorageManagerTest2: QuickSpec {
                 }
 
                 it("with the application") {
-                    let sm = StorageManager.instance!
+                    _ = StorageManager.instance!
 
                     
                 }

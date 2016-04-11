@@ -10,11 +10,11 @@ import Foundation
 
 internal protocol StorageSchemeListener {
     
-    func shareUpdates(source: StorageScheme, adds: [XDataObject], deletes: [XDataObject])
+    func shareUpdates(source: StorageScheme, adds: [XDataObject]?, deletes: [XDataObject]?)
     
 }
 
-internal protocol StorageScheme {
+internal protocol StorageScheme : StorageSchemeListener {
     
     init(config: StorageManagerConfig)
     
@@ -26,6 +26,29 @@ internal protocol StorageScheme {
     
     func getAllDataObject() -> [XDataObject]
 
+    func add(obj : XDataObject) -> Bool
+    func delete(obj : XDataObject) -> Bool
 
 }
 
+internal func == (lhs: StorageScheme, rhs: StorageScheme) {
+    return lhs == rhs
+}
+
+internal extension StorageScheme {
+
+    internal func shareUpdates(source: StorageScheme, adds: [XDataObject]?, deletes: [XDataObject]?) {
+        NSLog("StorageScheme.shareUpdates \(StorageScheme.self)")
+        if let a = adds {
+            a.forEach { (xdo) -> () in
+                add(xdo)
+            }
+        }
+        if let d = deletes {
+            d.forEach { (xdo) -> () in
+                delete(xdo)
+            }
+        }
+    }
+
+}

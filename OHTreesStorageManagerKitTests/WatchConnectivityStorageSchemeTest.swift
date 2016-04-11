@@ -7,22 +7,61 @@
 //
 
 import Foundation
+import WatchConnectivity
 
 import Quick
 import Nimble
 @testable import OHTreesStorageManagerKit
 
+class MockWatchConnectingSession: WatchConnectingSession {
+    var didCallActivateSession = false
+    
+    private var wcSessionDelegate_: WCSessionDelegate?
+    
+    weak var delegate: WCSessionDelegate? {
+        get {
+            return wcSessionDelegate_
+        }
+        set {
+            wcSessionDelegate_ = newValue
+        }}
+
+    var receivedApplicationContexts: [[String: AnyObject]] = [[String: AnyObject]]()
+    
+    
+    func activateSession() {
+        didCallActivateSession = true
+    }
+    
+    var receivedApplicationContext: [String: AnyObject] {
+        get {
+            if receivedApplicationContexts.count > 0 {
+                return receivedApplicationContexts.removeFirst()
+            } else {
+                return [String: AnyObject]()
+            }
+        }
+    }
+
+}
 
 class WatchConnectivityStorageSchemeTest: QuickSpec {
     override func spec() {
         
         describe("WatchConnectivityStorageSchemeTest") {
         
+            var mockSession: MockWatchConnectingSession!
+            func getSession() -> WatchConnectingSession {
+                return mockSession
+            }
+            
             beforeEach() {
                 StorageManager.reset()
                 var c = StorageManagerConfig()
                 c.types.append(.WatchConnectivity)
                 c.objectFactory = TestObjectFactory()
+                mockSession = MockWatchConnectingSession()
+                c.wcSession = getSession
                 do {
                     try StorageManager.configure(c)
                 } catch {
@@ -77,6 +116,7 @@ class WatchConnectivityStorageSchemeTest: QuickSpec {
             
             describe("on changes to the data") {
 
+                
                 it("observers are notified") {
                     
                     StorageManager.reset()
@@ -85,6 +125,9 @@ class WatchConnectivityStorageSchemeTest: QuickSpec {
                     c.types.append(.WatchConnectivity)
                     c.objectFactory = TestObjectFactory()
                     c.options["CoreDataInMemory"] = "CoreDataInMemory"
+
+                    mockSession = MockWatchConnectingSession()
+                    c.wcSession = getSession
                     
                     let cdsm = WatchConnectivityStorageScheme(config: c)
 
@@ -103,6 +146,101 @@ class WatchConnectivityStorageSchemeTest: QuickSpec {
                     expect(obs.log[0].uppercaseString).to(equal("delete with key=TestObject:Key".uppercaseString))
                 }
                 
+            }
+            
+            describe("can recieve updates from its ios/watch partner") {
+                
+                var mockSession: MockWatchConnectingSession!
+                func getSession() -> WatchConnectingSession {
+                    return mockSession
+                }
+
+                beforeEach() {
+                    StorageManager.reset()
+                    var c = StorageManagerConfig()
+                    c.types.append(.WatchConnectivity)
+                    c.objectFactory = TestObjectFactory()
+                    mockSession = MockWatchConnectingSession()
+                    c.wcSession = getSession
+                    do {
+                        try StorageManager.configure(c)
+                    } catch {
+                        // do nothing
+                    }
+                }
+
+                it("for adding an item") {
+                    let sm: StorageManager = StorageManager.instance!
+                    
+                    let content : [[String : AnyObject]] = [
+                        ["key" : "TestObject"]
+                    ]
+                    let applicationContextUpdate: [String: AnyObject] = ["Objects": content]
+                    
+                    // Fortunately the WCSession argument is not used
+                    mockSession.delegate!.session!(WCSession.defaultSession(), didReceiveApplicationContext: applicationContextUpdate)
+                    
+                    let actual = sm.get()
+                    expect(actual.count == 1).to(equal(true))
+                    
+                }
+
+                it("for deleting an item") {
+                    let sm: StorageManager = StorageManager.instance!
+
+                    let o1 = TestObject()
+                    let o2 = AnotherTestObject()
+                    
+                    sm.add(o1)
+                    sm.add(o2)
+                    
+                    let pre = sm.get()
+                    expect(pre.count == 2).to(equal(true))
+                    
+                    let content : [[String : AnyObject]] = [
+                        ["key" : "TestObject"]
+                    ]
+                    let applicationContextUpdate: [String: AnyObject] = ["Objects": content]
+                    
+                    // Fortunately the WCSession argument is not used
+                    mockSession.delegate!.session!(WCSession.defaultSession(), didReceiveApplicationContext: applicationContextUpdate)
+                    let actual = sm.get()
+                    expect(actual.count == 1).to(equal(true))
+
+                    let obj2 = sm.get()[0]
+                    let v2 = obj2.key
+                    
+                    expect(o1.key == v2).to(equal(true))
+                }
+
+                it("for deleting the correct item") {
+                    let sm: StorageManager = StorageManager.instance!
+                    
+                    let o1 = TestObject()
+                    let o2 = AnotherTestObject()
+                    
+                    sm.add(o1)
+                    sm.add(o2)
+                    
+                    let pre = sm.get()
+                    expect(pre.count == 2).to(equal(true))
+                    
+                    let content : [[String : AnyObject]] = [
+                        ["key" : "AnotherTestObject"]
+                    ]
+                    let applicationContextUpdate: [String: AnyObject] = ["Objects": content]
+                    
+                    // Fortunately the WCSession argument is not used
+                    mockSession.delegate!.session!(WCSession.defaultSession(), didReceiveApplicationContext: applicationContextUpdate)
+                    let actual = sm.get()
+                    expect(actual.count == 1).to(equal(true))
+                    
+                    let obj2 = sm.get()[0]
+                    let v2 = obj2.key
+                    
+                    expect(o2.key == v2).to(equal(true))
+                }
+
             }
             
         }

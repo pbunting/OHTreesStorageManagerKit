@@ -15,9 +15,12 @@ internal class WatchConnectivityStorageScheme: StorageScheme {
     
     let dataObjectFactory: XDataObjectFactory
     
+    let watchSession: () -> WatchConnectingSession?
+    
     internal required init(config: StorageManagerConfig) {
         storageObservers = [StorageSchemeListener]()
         dataObjectFactory = config.objectFactory!
+        watchSession = config.wcSession
     }
 
     internal func addObserver(observer: StorageSchemeListener) {
@@ -33,7 +36,6 @@ internal class WatchConnectivityStorageScheme: StorageScheme {
         }
     }
     
-
     internal func deleteDataObject(object: XDataObject) {
         NSLog("WatchConnectivityStorageManager.deleteDataObject")
         if delete(object) {
@@ -46,7 +48,7 @@ internal class WatchConnectivityStorageScheme: StorageScheme {
     
     private func initializeFromWatchKit() -> [XDataObject] {
         NSLog("WatchStorageManager.initializeFromWatchKit")
-        guard let objectDicts = WCSession.defaultSession().receivedApplicationContext["Objects"] as? [[String : AnyObject]]
+        guard let objectDicts = watchSession()!.receivedApplicationContext["Objects"] as? [[String : AnyObject]]
             else {
                 return []
         }
@@ -84,21 +86,10 @@ internal class WatchConnectivityStorageScheme: StorageScheme {
         storageObservers.forEach { (smo) -> () in
             smo.shareUpdates(self, adds: adds, deletes: deletes)
         }
-        
-    }
-    
-    internal func shareUpdates(adds: [XDataObject], deletes: [XDataObject]) {
-        NSLog("WatchConnectivityStorageManager.shareUpdates")
-        adds.forEach { (xdo) -> () in
-            add(xdo)
-        }
-        deletes.forEach { (xdo) -> () in
-            delete(xdo)
-        }
     }
     
     
-    private func add(obj : XDataObject) -> Bool {
+    internal func add(obj : XDataObject) -> Bool {
         NSLog("WatchStorageManager add")
         // Communicate this change with the iOS app
         if isNew(obj) {
@@ -120,7 +111,7 @@ internal class WatchConnectivityStorageScheme: StorageScheme {
         }
     }
     
-    private func delete(obj : XDataObject) -> Bool {
+    internal func delete(obj : XDataObject) -> Bool {
         // Communicate this change with the iOS app
         //        let dataObjects = getAllDataObject()
         NSLog("WatchStorageManager.delete")

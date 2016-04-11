@@ -20,6 +20,7 @@ internal class CoreDataStorageScheme: StorageScheme {
 
     var managedObjectModel: NSManagedObjectModel!
     
+    
     internal required init(config: StorageManagerConfig) {
         storageObservers = [StorageSchemeListener]()
         dataObjectFactory = config.objectFactory!
@@ -78,8 +79,6 @@ internal class CoreDataStorageScheme: StorageScheme {
     // Create the coordinator and store
     var persistentStoreCoordinator: NSPersistentStoreCoordinator?
     
-
-    
     internal func addObserver(obs: StorageSchemeListener) {
         // ToDo: Look out this is not checking for duplicates
         storageObservers.append(obs)
@@ -122,6 +121,7 @@ internal class CoreDataStorageScheme: StorageScheme {
         }
     }
     
+    
     internal func getAllDataObject() -> [XDataObject] {
         prepareRuntimeCache()
         return runtimeCache!
@@ -155,7 +155,7 @@ internal class CoreDataStorageScheme: StorageScheme {
         return result
     }
 
-    private func add(obj : XDataObject) -> Bool {
+    internal func add(obj : XDataObject) -> Bool {
         var added = false
         NSLog("CoreDataStorageScheme.add")
         prepareRuntimeCache()
@@ -182,7 +182,7 @@ internal class CoreDataStorageScheme: StorageScheme {
         return added
     }
     
-    private func delete(obj : XDataObject) -> Bool {
+    internal func delete(obj : XDataObject) -> Bool {
         var deleted = false
         NSLog("CoreDataStorageScheme.delete")
         if !isNew(obj) {
@@ -211,22 +211,12 @@ internal class CoreDataStorageScheme: StorageScheme {
         return deleted
     }
 
-    private func shareAll(adds : [XDataObject], deletes : [XDataObject]) {
+    private func shareAll(adds : [XDataObject]?, deletes : [XDataObject]?) {
         NSLog("CoreDataStorageScheme.shareAll")
         storageObservers.forEach { (smo) -> () in
             smo.shareUpdates(self, adds: adds, deletes: deletes)
         }
         
-    }
-
-    internal func shareUpdates(adds: [XDataObject], deletes: [XDataObject]) {
-        NSLog("CoreDataStorageScheme.shareUpdates")
-        adds.forEach { (xdo) -> () in
-            add(xdo)
-        }
-        deletes.forEach { (xdo) -> () in
-            delete(xdo)
-        }
     }
 
 
