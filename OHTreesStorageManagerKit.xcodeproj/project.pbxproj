@@ -12,6 +12,8 @@
 		2F356B621C9F7943009DBE8A /* StorageManagerTest2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F356B611C9F7943009DBE8A /* StorageManagerTest2.swift */; };
 		2F356B7A1CA255A1009DBE8A /* XDataObjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F356B761CA22DCD009DBE8A /* XDataObjectModel.xcdatamodeld */; };
 		2F3F1B7C1CB1D728007012DA /* WatchConnectivityStorageSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F1B7B1CB1D728007012DA /* WatchConnectivityStorageSchemeTest.swift */; };
+		2F5EB0AD1CC4526200997FDA /* StorageConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5EB0AC1CC4526200997FDA /* StorageConfig.swift */; };
+		2F5EB0BF1CC4560500997FDA /* OHTreesAppConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5EB0981CC4522500997FDA /* OHTreesAppConfig.framework */; };
 		2FA49BC11C9DE035002F76CC /* OHTreesStorageManagerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FA49BC01C9DE035002F76CC /* OHTreesStorageManagerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2FA49BC81C9DE035002F76CC /* OHTreesStorageManagerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49BBD1C9DE035002F76CC /* OHTreesStorageManagerKit.framework */; };
 		2FA49C401C9DF120002F76CC /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C231C9DF0B9002F76CC /* Nimble.framework */; };
@@ -26,9 +28,37 @@
 		2FA49C691C9E71E6002F76CC /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C671C9E71E6002F76CC /* CloudKit.framework */; };
 		2FA49C6A1C9E71E6002F76CC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C681C9E71E6002F76CC /* CoreData.framework */; };
 		2FF628521CB2AB8100A90797 /* WatchSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF628511CB2AB8100A90797 /* WatchSessionDelegate.swift */; };
+		2FF628691CBB5AB000A90797 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF628681CBB5AB000A90797 /* AppDelegate.swift */; };
+		2FF6286B1CBB5AB000A90797 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF6286A1CBB5AB000A90797 /* MasterViewController.swift */; };
+		2FF6286D1CBB5AB000A90797 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF6286C1CBB5AB000A90797 /* DetailViewController.swift */; };
+		2FF628701CBB5AB000A90797 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF6286E1CBB5AB000A90797 /* Main.storyboard */; };
+		2FF628721CBB5AB000A90797 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FF628711CBB5AB000A90797 /* Assets.xcassets */; };
+		2FF628751CBB5AB000A90797 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF628731CBB5AB000A90797 /* LaunchScreen.storyboard */; };
+		2FF6287B1CBB5AC900A90797 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C671C9E71E6002F76CC /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2F5EB0971CC4522500997FDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F5EB08F1CC4522500997FDA /* OHTreesAppConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2F1928211CC34209001E4007;
+			remoteInfo = OHTreesAppConfig;
+		};
+		2F5EB0991CC4522500997FDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F5EB08F1CC4522500997FDA /* OHTreesAppConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2F19282B1CC34209001E4007;
+			remoteInfo = OHTreesAppConfigTests;
+		};
+		2F5EB09B1CC4522500997FDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F5EB08F1CC4522500997FDA /* OHTreesAppConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2F1928951CC4249E001E4007;
+			remoteInfo = OHTreesAppConfigTestApp;
+		};
 		2FA49BC91C9DE035002F76CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2FA49BB41C9DE035002F76CC /* Project object */;
@@ -141,6 +171,13 @@
 			remoteGlobalIDString = 1F5DF15E1BDCA0CE00C3A531;
 			remoteInfo = "Nimble-tvOSTests";
 		};
+		2FF6287C1CBB5AD700A90797 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2FA49BB41C9DE035002F76CC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2FF628651CBB5AB000A90797;
+			remoteInfo = OHTreesStorageManagerApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +186,8 @@
 		2F356B611C9F7943009DBE8A /* StorageManagerTest2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManagerTest2.swift; sourceTree = "<group>"; };
 		2F356B771CA22DCD009DBE8A /* XDataObjectModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = XDataObjectModel.xcdatamodel; sourceTree = "<group>"; };
 		2F3F1B7B1CB1D728007012DA /* WatchConnectivityStorageSchemeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectivityStorageSchemeTest.swift; sourceTree = "<group>"; };
+		2F5EB08F1CC4522500997FDA /* OHTreesAppConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHTreesAppConfig.xcodeproj; path = Carthage/Checkouts/OHTreesAppConfig/OHTreesAppConfig.xcodeproj; sourceTree = "<group>"; };
+		2F5EB0AC1CC4526200997FDA /* StorageConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageConfig.swift; sourceTree = "<group>"; };
 		2FA49BBD1C9DE035002F76CC /* OHTreesStorageManagerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OHTreesStorageManagerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA49BC01C9DE035002F76CC /* OHTreesStorageManagerKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OHTreesStorageManagerKit.h; sourceTree = "<group>"; };
 		2FA49BC21C9DE035002F76CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -166,6 +205,15 @@
 		2FA49C671C9E71E6002F76CC /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		2FA49C681C9E71E6002F76CC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2FF628511CB2AB8100A90797 /* WatchSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionDelegate.swift; sourceTree = "<group>"; };
+		2FF628661CBB5AB000A90797 /* OHTreesStorageManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OHTreesStorageManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FF628681CBB5AB000A90797 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2FF6286A1CBB5AB000A90797 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		2FF6286C1CBB5AB000A90797 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		2FF6286F1CBB5AB000A90797 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2FF628711CBB5AB000A90797 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2FF628741CBB5AB000A90797 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2FF628761CBB5AB000A90797 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FF6287A1CBB5AC000A90797 /* OHTreesStorageManagerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OHTreesStorageManagerApp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F5EB0BF1CC4560500997FDA /* OHTreesAppConfig.framework in Frameworks */,
 				2FA49C691C9E71E6002F76CC /* CloudKit.framework in Frameworks */,
 				2FA49C6A1C9E71E6002F76CC /* CoreData.framework in Frameworks */,
 			);
@@ -188,14 +237,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2FF628631CBB5AB000A90797 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FF6287B1CBB5AC900A90797 /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F5EB0901CC4522500997FDA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F5EB0981CC4522500997FDA /* OHTreesAppConfig.framework */,
+				2F5EB09A1CC4522500997FDA /* OHTreesAppConfigTests.xctest */,
+				2F5EB09C1CC4522500997FDA /* OHTreesAppConfigTestApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2FA49BB31C9DE035002F76CC = {
 			isa = PBXGroup;
 			children = (
 				2FA49BBF1C9DE035002F76CC /* OHTreesStorageManagerKit */,
 				2FA49BCB1C9DE035002F76CC /* OHTreesStorageManagerKitTests */,
+				2FF628671CBB5AB000A90797 /* OHTreesStorageManagerApp */,
 				2FA49BBE1C9DE035002F76CC /* Products */,
 				2FA49C3E1C9DF0C8002F76CC /* Frameworks */,
 			);
@@ -206,6 +274,7 @@
 			children = (
 				2FA49BBD1C9DE035002F76CC /* OHTreesStorageManagerKit.framework */,
 				2FA49BC71C9DE035002F76CC /* OHTreesStorageManagerKitTests.xctest */,
+				2FF628661CBB5AB000A90797 /* OHTreesStorageManagerApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -213,6 +282,7 @@
 		2FA49BBF1C9DE035002F76CC /* OHTreesStorageManagerKit */ = {
 			isa = PBXGroup;
 			children = (
+				2F5EB0AC1CC4526200997FDA /* StorageConfig.swift */,
 				2FA49BC01C9DE035002F76CC /* OHTreesStorageManagerKit.h */,
 				2FA49BC21C9DE035002F76CC /* Info.plist */,
 				2FA49C5B1C9DF95A002F76CC /* StorageManager.swift */,
@@ -272,12 +342,28 @@
 		2FA49C3E1C9DF0C8002F76CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F5EB08F1CC4522500997FDA /* OHTreesAppConfig.xcodeproj */,
 				2FA49C671C9E71E6002F76CC /* CloudKit.framework */,
 				2FA49C681C9E71E6002F76CC /* CoreData.framework */,
 				2FA49C191C9DF0B9002F76CC /* Nimble.xcodeproj */,
 				2FA49BFB1C9DF0AF002F76CC /* Quick.xcodeproj */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2FF628671CBB5AB000A90797 /* OHTreesStorageManagerApp */ = {
+			isa = PBXGroup;
+			children = (
+				2FF6287A1CBB5AC000A90797 /* OHTreesStorageManagerApp.entitlements */,
+				2FF628681CBB5AB000A90797 /* AppDelegate.swift */,
+				2FF6286A1CBB5AB000A90797 /* MasterViewController.swift */,
+				2FF6286C1CBB5AB000A90797 /* DetailViewController.swift */,
+				2FF6286E1CBB5AB000A90797 /* Main.storyboard */,
+				2FF628711CBB5AB000A90797 /* Assets.xcassets */,
+				2FF628731CBB5AB000A90797 /* LaunchScreen.storyboard */,
+				2FF628761CBB5AB000A90797 /* Info.plist */,
+			);
+			path = OHTreesStorageManagerApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,11 +411,29 @@
 			);
 			dependencies = (
 				2FA49BCA1C9DE035002F76CC /* PBXTargetDependency */,
+				2FF6287D1CBB5AD700A90797 /* PBXTargetDependency */,
 			);
 			name = OHTreesStorageManagerKitTests;
 			productName = OHTreesStorageManagerKitTests;
 			productReference = 2FA49BC71C9DE035002F76CC /* OHTreesStorageManagerKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2FF628651CBB5AB000A90797 /* OHTreesStorageManagerApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FF628771CBB5AB000A90797 /* Build configuration list for PBXNativeTarget "OHTreesStorageManagerApp" */;
+			buildPhases = (
+				2FF628621CBB5AB000A90797 /* Sources */,
+				2FF628631CBB5AB000A90797 /* Frameworks */,
+				2FF628641CBB5AB000A90797 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OHTreesStorageManagerApp;
+			productName = OHTreesStorageManagerApp;
+			productReference = 2FF628661CBB5AB000A90797 /* OHTreesStorageManagerApp.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -346,6 +450,16 @@
 					};
 					2FA49BC61C9DE035002F76CC = {
 						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 2FF628651CBB5AB000A90797;
+					};
+					2FF628651CBB5AB000A90797 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = V3WGCU577T;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -355,6 +469,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 2FA49BB31C9DE035002F76CC;
 			productRefGroup = 2FA49BBE1C9DE035002F76CC /* Products */;
@@ -365,6 +480,10 @@
 					ProjectRef = 2FA49C191C9DF0B9002F76CC /* Nimble.xcodeproj */;
 				},
 				{
+					ProductGroup = 2F5EB0901CC4522500997FDA /* Products */;
+					ProjectRef = 2F5EB08F1CC4522500997FDA /* OHTreesAppConfig.xcodeproj */;
+				},
+				{
 					ProductGroup = 2FA49BFC1C9DF0AF002F76CC /* Products */;
 					ProjectRef = 2FA49BFB1C9DF0AF002F76CC /* Quick.xcodeproj */;
 				},
@@ -373,11 +492,33 @@
 			targets = (
 				2FA49BBC1C9DE035002F76CC /* OHTreesStorageManagerKit */,
 				2FA49BC61C9DE035002F76CC /* OHTreesStorageManagerKitTests */,
+				2FF628651CBB5AB000A90797 /* OHTreesStorageManagerApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		2F5EB0981CC4522500997FDA /* OHTreesAppConfig.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OHTreesAppConfig.framework;
+			remoteRef = 2F5EB0971CC4522500997FDA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2F5EB09A1CC4522500997FDA /* OHTreesAppConfigTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OHTreesAppConfigTests.xctest;
+			remoteRef = 2F5EB0991CC4522500997FDA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2F5EB09C1CC4522500997FDA /* OHTreesAppConfigTestApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = OHTreesAppConfigTestApp.app;
+			remoteRef = 2F5EB09B1CC4522500997FDA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		2FA49C081C9DF0AF002F76CC /* Quick.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -500,6 +641,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2FF628641CBB5AB000A90797 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FF628751CBB5AB000A90797 /* LaunchScreen.storyboard in Resources */,
+				2FF628721CBB5AB000A90797 /* Assets.xcassets in Resources */,
+				2FF628701CBB5AB000A90797 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -524,6 +675,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FA49C5E1C9E26C2002F76CC /* StorageScheme.swift in Sources */,
+				2F5EB0AD1CC4526200997FDA /* StorageConfig.swift in Sources */,
 				2FA49C661C9E697D002F76CC /* WatchConnectivityStorageScheme.swift in Sources */,
 				2FA49C601C9E2784002F76CC /* XDataObject.swift in Sources */,
 				2FA49C5C1C9DF95A002F76CC /* StorageManager.swift in Sources */,
@@ -546,6 +698,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2FF628621CBB5AB000A90797 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2FF6286D1CBB5AB000A90797 /* DetailViewController.swift in Sources */,
+				2FF6286B1CBB5AB000A90797 /* MasterViewController.swift in Sources */,
+				2FF628691CBB5AB000A90797 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -554,7 +716,31 @@
 			target = 2FA49BBC1C9DE035002F76CC /* OHTreesStorageManagerKit */;
 			targetProxy = 2FA49BC91C9DE035002F76CC /* PBXContainerItemProxy */;
 		};
+		2FF6287D1CBB5AD700A90797 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2FF628651CBB5AB000A90797 /* OHTreesStorageManagerApp */;
+			targetProxy = 2FF6287C1CBB5AD700A90797 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2FF6286E1CBB5AB000A90797 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2FF6286F1CBB5AB000A90797 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2FF628731CBB5AB000A90797 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2FF628741CBB5AB000A90797 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2FA49BCF1C9DE035002F76CC /* Debug */ = {
@@ -693,6 +879,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.100trees.OHTreesStorageManagerKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OHTreesStorageManagerApp.app/OHTreesStorageManagerApp";
 			};
 			name = Debug;
 		};
@@ -704,6 +891,37 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.100trees.OHTreesStorageManagerKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OHTreesStorageManagerApp.app/OHTreesStorageManagerApp";
+			};
+			name = Release;
+		};
+		2FF628781CBB5AB000A90797 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OHTreesStorageManagerApp/OHTreesStorageManagerApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = OHTreesStorageManagerApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.100trees.OHTreesStorageManagerApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		2FF628791CBB5AB000A90797 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OHTreesStorageManagerApp/OHTreesStorageManagerApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = OHTreesStorageManagerApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.100trees.OHTreesStorageManagerApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -733,6 +951,15 @@
 			buildConfigurations = (
 				2FA49BD51C9DE035002F76CC /* Debug */,
 				2FA49BD61C9DE035002F76CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2FF628771CBB5AB000A90797 /* Build configuration list for PBXNativeTarget "OHTreesStorageManagerApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FF628781CBB5AB000A90797 /* Debug */,
+				2FF628791CBB5AB000A90797 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

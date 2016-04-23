@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CloudKit
 import WatchConnectivity
 
 internal protocol WatchConnectingSession {
@@ -17,11 +18,26 @@ internal protocol WatchConnectingSession {
 
 extension WCSession: WatchConnectingSession {}
 
+protocol CloudKitConnector {
+    
+    var privateCloudDatabase: CKDatabase { get }
+}
+
+extension CKContainer: CloudKitConnector {}
+
+//protocol CloudConnectivityManager {
+//    func registerForNotification()
+//}
+
 public struct StorageManagerConfig {
 
     var Core_Data_Model_File_Name: String = "XDataObjectModel"
     
     var wcSession: () -> WatchConnectingSession? = { return WCSession.defaultSession() }
+    
+    var ckConnector: () -> CloudKitConnector? = { return CKContainer.defaultContainer() }
+    
+//    var cloudStorageManager: CloudConnectivityManager? = nil
     
     var types: [StorageType] = [StorageType]()
     
@@ -101,8 +117,7 @@ public class StorageManager : StorageSchemeListener{
             case .CoreData:
                 scheme = CoreDataStorageScheme(config: config)
             case .CloudKit:
-                scheme = CoreDataStorageScheme(config: config)
-//                scheme = CloudKitStorageScheme(objectFactory: StorageManager.objectFactory!)
+                scheme = CloudKitStorageScheme(config: config)
             default: // WatchConnectivity
                 scheme = WatchConnectivityStorageScheme(config: config)
             }

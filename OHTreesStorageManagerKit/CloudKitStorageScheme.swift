@@ -9,6 +9,7 @@
 import Foundation
 import CloudKit
 
+
 internal class CloudKitStorageScheme: StorageScheme {
     
     private var storageObservers: [StorageSchemeListener]
@@ -16,22 +17,27 @@ internal class CloudKitStorageScheme: StorageScheme {
     let dataObjectFactory: XDataObjectFactory
 
     let privateDatabase: CKDatabase!
+    
+    private var cloudAvailable: Bool = false
+    
+    private var application: UIApplication?
+
+    var runtimeCache: [XDataObject]?
 
     internal required init(config: StorageManagerConfig) {
         storageObservers = [StorageSchemeListener]()
         dataObjectFactory = config.objectFactory!
 
-        let myContainer = CKContainer.defaultContainer()
-        self.privateDatabase = myContainer.privateCloudDatabase
-
+        let myContainer = config.ckConnector()
+        self.privateDatabase = myContainer!.privateCloudDatabase
+        
+        runtimeCache = initializeFromCloudKit()
     }
-    
+ 
     internal func addObserver(observer: StorageSchemeListener) {
         // ToDo: Look out this is not checking for duplicates
         storageObservers.append(observer)
     }
-    
-    var runtimeCache: [XDataObject]?
     
     private func lostTrackHandler(subs: CKSubscription?, err: NSError?) -> Void {
         if let error = err {
@@ -67,48 +73,118 @@ internal class CloudKitStorageScheme: StorageScheme {
         return dict
     }
     
-    private func initializeFromCloudKit() -> [XDataObject] {
-        
-        var objects = [XDataObject]()
-        
-        self.dataObjectFactory.entityNames.forEach {
-            let pred = NSPredicate()
-            let query = CKQuery(recordType: $0,
-                predicate:  pred)
-            subscribeToUpdates($0, predicate: pred)
-            
-            self.privateDatabase.performQuery(query, inZoneWithID: nil) { (records, error) -> Void in
-                if let e = error {
-                    self.lostTrackHandler(e)
-                } else {
-                    if let recs = records {
-                        for r in recs {
-                            objects.append(self.dataObjectFactory.fromDictionary(self.recordToDictionary(r)))
-                        }
-                    }
+    private func fetchObjects(entityName: String) -> Void {
+        let query = CKQuery(recordType: entityName, predicate: NSPredicate(value: true))
+        self.privateDatabase.performQuery(query, inZoneWithID: nil) { (records, error) -> Void in
+            if let e = error {
+                self.lostTrackHandler(e)
+            } else {
+                if let recs = records {
+                    let newEntities = recs.map( { r in
+                        self.dataObjectFactory.fromDictionary(self.recordToDictionary(r))
+                    } )
+                    newEntities.forEach( { self.add($0, onCompletion: nil) } )
+//                        self.add(obj: ,
+//                            onCompletion: { (updated: Bool, error: NSError?, updates: [XDataObject]?, deletes: [XDataObject]?) -> Void in
+//                            }
+//                        )
+//                    }
+                    self.shareAll(newEntities, deletes: nil)
+
                 }
             }
         }
-        return objects
     }
     
-    private func prepareRuntimeCache() {
-        if runtimeCache == nil {
-            runtimeCache = initializeFromCloudKit()
-            shareAll(runtimeCache!, deletes: nil)
-        }
+    private func initializeFromCloudKit() -> [XDataObject] {
+        
+        let entityNames = self.dataObjectFactory.entityNames
+        
+        self.privateDatabase.fetchAllSubscriptionsWithCompletionHandler({ (subs, error) -> Void in
+            if let e = error {
+                self.lostTrackHandler(e)
+            } else {
+                if let s = subs {
+                    // Find the Entities that are already subscribed to
+                    let entitiesAlreadySubscribed = s.map( {sbscrptn in sbscrptn.recordType!} )
+                    // Determine which Entities are not subscribed to yet
+                    let entitiesNeedSubscriptions = entityNames.filter( { !entitiesAlreadySubscribed.contains($0) } )
+                    // Subscribe to them
+                    entitiesNeedSubscriptions.forEach {
+                        let subs = CKSubscription(recordType: $0, predicate: NSPredicate(value: true), options: CKSubscriptionOptions.FiresOnRecordCreation)
+                        self.privateDatabase.saveSubscription(subs, completionHandler: { (subscription, errr) -> Void in
+                            if let sbscpt = subscription {
+                                self.fetchObjects(sbscpt.recordType!)
+                            }})
+                    }
+                }
+            }
+        })
+        return [XDataObject]()
+//        self.dataObjectFactory.entityNames.forEach {
+//            
+//            //
+//            let pred: NSPredicate = NSPredicate(value: true)
+//            let query = CKQuery(recordType: $0,
+//                predicate:  pred)
+//            subscribeToUpdates($0, predicate: pred)
+//            
+//            self.privateDatabase.performQuery(query, inZoneWithID: nil) { (records, error) -> Void in
+//                if let e = error {
+//                    self.lostTrackHandler(e)
+//                } else {
+//                    if let recs = records {
+//                        for r in recs {
+//                            objects.append(self.dataObjectFactory.fromDictionary(self.recordToDictionary(r)))
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return objects
     }
+    
     
     private func isNew(obj : XDataObject) -> Bool {
         //        let o = obj as! XDataObject
-        prepareRuntimeCache()
+//        prepareRuntimeCache()
         let match = runtimeCache?.filter({$0.key == obj.key})
         let result = match!.count == 0
         NSLog("CloudKitStorageManager.isNew=\(result)")
         return result
     }
 
-    private func add(obj: XDataObject, onCompletion:(updated: Bool, error: NSError?, updates: [XDataObject]?, deletes: [XDataObject]?) -> Void) -> Void {
+    private func delete(obj: XDataObject, onCompletion:(updated: Bool, error: NSError?, updates: [XDataObject]?, deletes: [XDataObject]?) -> Void) -> Void {
+        
+        NSLog("CloudKitStorageManager.delete")
+        if !isNew(obj) {
+            runtimeCache = runtimeCache!.filter { (d) -> Bool in
+                d.key != obj.key
+            }
+            
+//            let pred: NSPredicate = NSPredicate(block: { o, map -> Bool in
+//                return map![o.key!!] != nil
+//            })
+            let pred: NSPredicate = NSPredicate(value: true)
+            let query = CKQuery(recordType: obj.objectName,
+                predicate:  pred)
+            self.privateDatabase.performQuery(query, inZoneWithID: nil) { (records, error) -> Void in
+                if let e = error {
+                    self.lostTrackHandler(e)
+                } else {
+                    if let recs = records {
+                        for r in recs {
+                            self.privateDatabase.deleteRecordWithID(r.recordID, completionHandler: { (id, err) -> Void in
+                                onCompletion(updated: true, error: err, updates: nil, deletes: [obj])
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func add(obj: XDataObject, onCompletion:((updated: Bool, error: NSError?, updates: [XDataObject]?, deletes: [XDataObject]?) -> Void)?) -> Void {
 
         NSLog("CloudKitStorageManager.add")
         
@@ -120,14 +196,18 @@ internal class CloudKitStorageScheme: StorageScheme {
 //            do {
                 var records = [CKRecord]()
                 // Create a drink cloudkit record
-                let objectRecord = CKRecord(recordType: obj.objectName)
-                objectRecord.setValuesForKeysWithDictionary(obj.asDictionary())
-                
+//            let objectRecord = CKRecord(recordType: obj.objectName, recordID: CKRecordID(recordName: obj.key))
+//                objectRecord.setValuesForKeysWithDictionary(obj.asDictionary())
+            let objectRecord = CKRecord(recordType: obj.objectName)
+            objectRecord.setValuesForKeysWithDictionary(obj.asDictionary())
+            
                 records.append(objectRecord)
                 
                 let x = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
                 x.modifyRecordsCompletionBlock = { (records:[CKRecord]?, deletedRecordIDs:[CKRecordID]?, e:NSError?) -> Void in
-                    onCompletion(updated: true, error: e, updates: updates, deletes:nil)
+                    if let handler = onCompletion {
+                        handler(updated: true, error: e, updates: updates, deletes:nil)
+                    }
                 }
                 x.queuePriority = NSOperationQueuePriority.VeryHigh
                 self.privateDatabase.addOperation(x)
@@ -142,22 +222,37 @@ internal class CloudKitStorageScheme: StorageScheme {
         }
     }
     
-    internal func addDataObject(object: XDataObject) {
-        NSLog("CloudKitStorageManager.addDataObject")
-        add(object, onCompletion:{
-            (act: Bool, e: NSError?, u: [XDataObject]?, d: [XDataObject]?) -> Void in
-            if act {
-                if let err = e {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.lostTrackHandler(err)
-                    }
-                } else {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.shareAll(u, deletes: d)
-                    }
+    private func completionHandler(act: Bool, e: NSError?, u: [XDataObject]?, d: [XDataObject]?) -> Void {
+        if act {
+            if let err = e {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.lostTrackHandler(err)
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.shareAll(u, deletes: d)
                 }
             }
-        })
+        }
+    }
+    
+    internal func addDataObject(object: XDataObject) {
+        NSLog("CloudKitStorageManager.addDataObject")
+        add(object, onCompletion: completionHandler)
+//        add(object, onCompletion:{
+//            (act: Bool, e: NSError?, u: [XDataObject]?, d: [XDataObject]?) -> Void in
+//            if act {
+//                if let err = e {
+//                    dispatch_async(dispatch_get_main_queue()) {
+//                        self.lostTrackHandler(err)
+//                    }
+//                } else {
+//                    dispatch_async(dispatch_get_main_queue()) {
+//                        self.shareAll(u, deletes: d)
+//                    }
+//                }
+//            }
+//        })
     }
     
     private func shareAll(adds : [XDataObject]?, deletes : [XDataObject]?) {
@@ -169,6 +264,22 @@ internal class CloudKitStorageScheme: StorageScheme {
 
     internal func deleteDataObject(object: XDataObject) {
         NSLog("CloudKitStorageManager.deleteDataObject")
+        delete(object, onCompletion: completionHandler)
+//        delete(object, onCompletion:{
+//            (act: Bool, e: NSError?, u: [XDataObject]?, d: [XDataObject]?) -> Void in
+//            if act {
+//                if let err = e {
+//                    dispatch_async(dispatch_get_main_queue()) {
+//                        self.lostTrackHandler(err)
+//                    }
+//                } else {
+//                    dispatch_async(dispatch_get_main_queue()) {
+//                        self.shareAll(u, deletes: d)
+//                    }
+//                }
+//            }
+//        })
+
         if delete(object) {
             // Now share with any other observers
             shareAll(nil, deletes: [object])
@@ -176,84 +287,15 @@ internal class CloudKitStorageScheme: StorageScheme {
     }
     
     internal func getAllDataObject() -> [XDataObject] {
-        prepareRuntimeCache()
+//        prepareRuntimeCache()
         return runtimeCache!
     }
     
-    
-    
-//    private func saveDrinks(newDrinks: [Drink]?, onCompletion:(r:[CKRecord]?, e: NSError?) -> Void ) -> Void {
-//        var records = [CKRecord]()
-//        if let drinks = newDrinks {
-//            for d in drinks {
-//                // Create a drink cloudkit record
-//                let drinkRecord = CKRecord(recordType: "drink")
-//                drinkRecord.setObject(d.volume.size, forKey: sizeKey)
-//                drinkRecord.setObject(d.volume.units.rawValue, forKey: unitsKey)
-//                drinkRecord.setObject(d.timestamp, forKey: timestampKey)
-//                records.append(drinkRecord)
-//            }
-//        }
-//        
-//        let x = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
-//        x.modifyRecordsCompletionBlock = { (records:[CKRecord]?, deletedRecordIDs:[CKRecordID]?, e:NSError?) -> Void in
-//            onCompletion(r: records, e:e)
-//        }
-//        x.queuePriority = NSOperationQueuePriority.VeryHigh
-//        self.privateDatabase.addOperation(x)
-//        
-//    }
-
     internal func delete(obj: XDataObject) ->  Bool {
-        return false
+        return true // fail safe, dont stop this object propagating to other storage schemes
     }
     
     internal func add(obj: XDataObject) -> Bool {
-
-                
-//                self.saveDrinks([d], )
-
-                
-//                try WCSession.defaultSession().updateApplicationContext(newContext as! [String : AnyObject])
-
-//        
-//        if let currentDrinks = self.getTodays() {
-//            var updatedDrinks = [Drink]()
-//            updatedDrinks.appendContentsOf(currentDrinks)
-//            updatedDrinks.append(d)
-//            
-//            let derivedTarget: Volume!
-//            if (target != nil) {
-//                derivedTarget = target
-//            } else {
-//                derivedTarget = sumDrinkVolumes(updatedDrinks)
-//            }
-//            
-//            if archive {
-//                if let interestedDelegate = self.delegate {
-//                    interestedDelegate.willUpdateDrinks(updatedDrinks, target: derivedTarget)
-//                }
-//                
-//                self.saveDrinks([d], onCompletion: { (r, e) -> Void in
-//                    if let error = e {
-//                        NSLog("Error \(error.localizedDescription) recording drink")
-//                    } else {
-//                        NSLog("Recorded drink at \(d.timestamp)")
-//                    }
-//                    if let interestedDelegate = self.delegate {
-//                        dispatch_async(dispatch_get_main_queue()) {
-//                            interestedDelegate.didUpdateDrinks(e, update: updatedDrinks, target: derivedTarget)
-//                        }
-//                    }
-//                })
-//            }
-//            
-//        } else {
-//            if let interestedDelegate = self.delegate {
-//                interestedDelegate.haveLostTrack(NSError(domain: "com.100trees.", code: 2, userInfo: nil))
-//            }
-//        }
-//    }
         return true // fail safe, dont stop this object propagating to other storage schemes
     }
 
