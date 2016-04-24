@@ -12,8 +12,9 @@
 		2F356B621C9F7943009DBE8A /* StorageManagerTest2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F356B611C9F7943009DBE8A /* StorageManagerTest2.swift */; };
 		2F356B7A1CA255A1009DBE8A /* XDataObjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F356B761CA22DCD009DBE8A /* XDataObjectModel.xcdatamodeld */; };
 		2F3F1B7C1CB1D728007012DA /* WatchConnectivityStorageSchemeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3F1B7B1CB1D728007012DA /* WatchConnectivityStorageSchemeTest.swift */; };
-		2F5EB0AD1CC4526200997FDA /* StorageConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5EB0AC1CC4526200997FDA /* StorageConfig.swift */; };
+		2F5EB0AD1CC4526200997FDA /* CloudKitStorageConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5EB0AC1CC4526200997FDA /* CloudKitStorageConfig.swift */; };
 		2F5EB0BF1CC4560500997FDA /* OHTreesAppConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5EB0981CC4522500997FDA /* OHTreesAppConfig.framework */; };
+		2F7C21C41CCC190500A13011 /* OHTreesAppConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5EB0981CC4522500997FDA /* OHTreesAppConfig.framework */; };
 		2FA49BC11C9DE035002F76CC /* OHTreesStorageManagerKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FA49BC01C9DE035002F76CC /* OHTreesStorageManagerKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2FA49BC81C9DE035002F76CC /* OHTreesStorageManagerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49BBD1C9DE035002F76CC /* OHTreesStorageManagerKit.framework */; };
 		2FA49C401C9DF120002F76CC /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA49C231C9DF0B9002F76CC /* Nimble.framework */; };
@@ -187,7 +188,7 @@
 		2F356B771CA22DCD009DBE8A /* XDataObjectModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = XDataObjectModel.xcdatamodel; sourceTree = "<group>"; };
 		2F3F1B7B1CB1D728007012DA /* WatchConnectivityStorageSchemeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchConnectivityStorageSchemeTest.swift; sourceTree = "<group>"; };
 		2F5EB08F1CC4522500997FDA /* OHTreesAppConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OHTreesAppConfig.xcodeproj; path = Carthage/Checkouts/OHTreesAppConfig/OHTreesAppConfig.xcodeproj; sourceTree = "<group>"; };
-		2F5EB0AC1CC4526200997FDA /* StorageConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageConfig.swift; sourceTree = "<group>"; };
+		2F5EB0AC1CC4526200997FDA /* CloudKitStorageConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStorageConfig.swift; sourceTree = "<group>"; };
 		2FA49BBD1C9DE035002F76CC /* OHTreesStorageManagerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OHTreesStorageManagerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA49BC01C9DE035002F76CC /* OHTreesStorageManagerKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OHTreesStorageManagerKit.h; sourceTree = "<group>"; };
 		2FA49BC21C9DE035002F76CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -231,6 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F7C21C41CCC190500A13011 /* OHTreesAppConfig.framework in Frameworks */,
 				2FA49C401C9DF120002F76CC /* Nimble.framework in Frameworks */,
 				2FA49C411C9DF120002F76CC /* Quick.framework in Frameworks */,
 				2FA49BC81C9DE035002F76CC /* OHTreesStorageManagerKit.framework in Frameworks */,
@@ -282,7 +284,7 @@
 		2FA49BBF1C9DE035002F76CC /* OHTreesStorageManagerKit */ = {
 			isa = PBXGroup;
 			children = (
-				2F5EB0AC1CC4526200997FDA /* StorageConfig.swift */,
+				2F5EB0AC1CC4526200997FDA /* CloudKitStorageConfig.swift */,
 				2FA49BC01C9DE035002F76CC /* OHTreesStorageManagerKit.h */,
 				2FA49BC21C9DE035002F76CC /* Info.plist */,
 				2FA49C5B1C9DF95A002F76CC /* StorageManager.swift */,
@@ -675,7 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FA49C5E1C9E26C2002F76CC /* StorageScheme.swift in Sources */,
-				2F5EB0AD1CC4526200997FDA /* StorageConfig.swift in Sources */,
+				2F5EB0AD1CC4526200997FDA /* CloudKitStorageConfig.swift in Sources */,
 				2FA49C661C9E697D002F76CC /* WatchConnectivityStorageScheme.swift in Sources */,
 				2FA49C601C9E2784002F76CC /* XDataObject.swift in Sources */,
 				2FA49C5C1C9DF95A002F76CC /* StorageManager.swift in Sources */,
