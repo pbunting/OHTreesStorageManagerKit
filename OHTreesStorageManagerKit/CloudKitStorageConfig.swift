@@ -113,7 +113,7 @@ public class CloudKitStorageConfig {
     
     public init(app: UIApplication?) {
         // Observe changes to the user's iCloud account status (account changed, logged out, etc...).
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleUbiquityIdentityDidChangeNotification:", name: NSUbiquityIdentityDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CloudKitStorageConfig.handleUbiquityIdentityDidChangeNotification(_:)), name: NSUbiquityIdentityDidChangeNotification, object: nil)
         
 //        if StorageConfig.sharedStorageConfig.isCloudAvailable {
         
